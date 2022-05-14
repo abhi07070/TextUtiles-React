@@ -1,20 +1,32 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About';
+import About from './components/About';
 import { useState } from 'react';
 import Alert from './components/Alert';
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
 
   //useState for Color mode
   const [mode, setMode] = useState('light'); //state variables :- whether dark mode is enabled or not
+  
+  // const removeBodyClasses=()=>{
+  //   document.body.classList.remove('bg-light')
+  //   document.body.classList.remove('bg-dark')
+  //   document.body.classList.remove('bg-warning')
+  //   document.body.classList.remove('bg-danger')
+  //   document.body.classList.remove('bg-success')
+  // }
+
+
   const toggleMode = () => {
+    // removeBodyClasses();
+    // document.body.classList.add('bg-'+cls);
     if (mode === 'light') {
       setMode('dark');
       document.body.style.backgroundColor = '#0a263f';
@@ -43,17 +55,16 @@ function App() {
     <>
 
       <div>
-        {/* <Router> */}
-        <Navbar title="TextUtiles" aboutText="About" mode={mode} toggleMode={toggleMode} />
-        <Alert alert={alert} />
-        {/* <Routes> */}
-        <TextForm tittle="Enter any text here" showAlert={showAlert}
-          mode={mode} />
-        {/* </Route> */}
-        {/* <About /> */}
-        {/* </Route> */}
-        {/* </Routes> */}
-        {/* </Router> */}
+      <Router>
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} AboutText="About us" />
+      <Alert alert={alert}/>
+      <div className="container my-3">
+      <Routes>
+      <Route path="/" element={<TextForm showAlert={showAlert} mode={mode} textarea="Enter the text to analyze" />} />
+     <Route path="/About" element={<About mode={mode} />} />
+      </Routes>
+      </div>
+      </Router>
       </div>
 
     </>
